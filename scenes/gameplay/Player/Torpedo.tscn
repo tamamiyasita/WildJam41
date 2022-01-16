@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/gameplay/Player/Torpedo.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gameplay/particle/Explosion.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 28, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 26.5, 12 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 3
+emission_point_count = 1
+flag_disable_z = true
+gravity = Vector3( 0, -1, 0 )
+initial_velocity = 20.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="Torpedo" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource( 1 )
+Explosion = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.121569, 0.0196078, 0.0196078, 1 )
+polygon = PoolVector2Array( 24, -8, 24, 8, -32, 8, -8, 0, -32, -8 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 4.5, 0 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( -24, 0 )
+amount = 11
+lifetime = 10.0
+process_material = SubResource( 3 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

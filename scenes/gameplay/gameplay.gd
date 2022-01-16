@@ -10,7 +10,7 @@ func pre_start(params):
 		for key in params:
 			var val = params[key]
 			printt("", key, val)
-	$Sprite.position = Game.size / 2
+#	$Sprite.position = Game.size / 2
 	set_process(false)
 
 
@@ -23,7 +23,7 @@ func start():
 	set_process(true)
 
 
-func _process(delta):
-	elapsed += delta
-	$Sprite.position.x = Game.size.x / 2 + 150 * sin(2 * 0.4 * PI * elapsed)
-	$Sprite.position.y = Game.size.y / 2 + 100 * sin(2 * 0.2 *  PI * elapsed)
+#func _process(delta):
+#	elapsed += delta
+#	$Sprite.position.x = Game.size.x / 2 + 150 * sin(2 * 0.4 * PI * elapsed)
+#	$Sprite.position.y = Game.size.y / 2 + 100 * sin(2 * 0.2 *  PI * elapsed)
