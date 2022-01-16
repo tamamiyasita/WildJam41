@@ -11,12 +11,15 @@ extents = Vector2( 26.5, 12 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 3
-emission_point_count = 1
+emission_point_count = 2
 flag_disable_z = true
-gravity = Vector3( 0, -1, 0 )
-initial_velocity = 20.0
+gravity = Vector3( 0, -20, 0 )
+initial_velocity = -2.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+radial_accel = 41.17
+radial_accel_random = 0.63
+scale = 3.0
 
 [node name="Torpedo" type="RigidBody2D"]
 collision_layer = 8
@@ -30,7 +33,7 @@ Explosion = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 0.121569, 0.0196078, 0.0196078, 1 )
+color = Color( 0.886275, 0.466667, 0.466667, 1 )
 polygon = PoolVector2Array( 24, -8, 24, 8, -32, 8, -8, 0, -32, -8 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -47,8 +50,9 @@ autostart = true
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( -24, 0 )
-amount = 11
-lifetime = 10.0
+amount = 30
+speed_scale = 1.58
+local_coords = false
 process_material = SubResource( 3 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
