@@ -4,7 +4,7 @@ extends RigidBody2D
 export var move_force := 600.0
 export(PackedScene) var Torpedo 
 
-onready var camera = get_node("Camera2D")
+onready var camera = get_parent().get_node("Camera2D")
 onready var shockwave = camera.get_node("Shockwave")
 
 func _ready() -> void:

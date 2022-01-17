@@ -20,7 +20,8 @@ func bite(delta):
 	var direction = on_bite_area.global_position - global_position
 	direction.normalized()
 	position += direction * speed * delta
-	scale /= 1.15
+	scale /= 1.11
+	rotation_degrees += 30
 	print(scale.length())
 	if scale.length() < .2:
 		queue_free()

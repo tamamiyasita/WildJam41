@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/gameplay/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/gameplay/pause-layer/pause-layer.tscn" type="PackedScene" id=2]
@@ -8,6 +8,89 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 101, 308 )
+
+[sub_resource type="Shader" id=22]
+code = "shader_type canvas_item;
+
+uniform vec2 global_position;
+uniform vec2 screen_size;
+uniform float force;
+uniform float size;
+uniform float thickness;
+
+void fragment(){
+	vec2 center = global_position;
+	float ratio = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
+	center.x = center.x / screen_size.x;
+	center.x = (center.x - 0.5) / ratio + 0.5;
+	center.y = (screen_size.y - center.y) / screen_size.y;
+	vec2 scaledUV = (SCREEN_UV - vec2(0.5, 0.0) ) / vec2(ratio, 1.0) + vec2(0.5, 0.0);
+	float mask = (1.0 - smoothstep(size-0.1, size, length(scaledUV - center))) * smoothstep(size-thickness-0.1, size-thickness, length(scaledUV - center));
+	vec2 disp = normalize(SCREEN_UV - center) * force * mask;
+	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - disp);
+}"
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 22 )
+shader_param/global_position = Vector2( 0, 0 )
+shader_param/screen_size = Vector2( 1600, 900 )
+shader_param/force = 0.0
+shader_param/size = 0.0
+shader_param/thickness = 0.1
+
+[sub_resource type="Animation" id=24]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/force")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "shockwave"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/force")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.3 ]
+}
 
 [node name="Gameplay" type="Node"]
 script = ExtResource( 5 )
@@ -30,3 +113,25 @@ position = Vector2( 98, 46 )
 shape = SubResource( 1 )
 
 [node name="Object" parent="." instance=ExtResource( 3 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Shockwave" type="ColorRect" parent="Camera2D"]
+material = SubResource( 23 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -800.0
+margin_top = -450.0
+margin_right = 800.0
+margin_bottom = 450.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/Shockwave"]
+anims/RESET = SubResource( 24 )
+anims/shockwave = SubResource( 25 )
