@@ -1,47 +1,54 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/gameplay/Player/Torpedo.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gameplay/particle/Explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://image/Torpedo3.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 28, 10 )
+extents = Vector2( 12.5, 4.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 26.5, 12 )
+extents = Vector2( 16.5, 6.5 )
 
 [sub_resource type="ParticlesMaterial" id=3]
-emission_shape = 3
-emission_point_count = 2
+lifetime_randomness = 1.0
 flag_disable_z = true
+spread = 122.65
 gravity = Vector3( 0, -20, 0 )
 initial_velocity = -2.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+linear_accel = 74.51
 radial_accel = 41.17
 radial_accel_random = 0.63
-scale = 3.0
+scale = 0.1
+scale_random = 0.87
+
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/buble.png-1278c928bdc64a4f08dc5a1343d12857.stex"
 
 [node name="Torpedo" type="RigidBody2D"]
+z_index = -1
 collision_layer = 8
 collision_mask = 6
+linear_velocity = Vector2( 380, 0 )
+linear_damp = 3.0
 script = ExtResource( 1 )
 Explosion = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.5, 6.5 )
 shape = SubResource( 1 )
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 0.886275, 0.466667, 0.466667, 1 )
-polygon = PoolVector2Array( 24, -8, 24, 8, -32, 8, -8, 0, -32, -8 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 4.5, 0 )
+position = Vector2( 1.5, 6.5 )
 shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -49,11 +56,21 @@ wait_time = 0.5
 autostart = true
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( -24, 0 )
-amount = 30
-speed_scale = 1.58
+position = Vector2( -22, 6 )
+amount = 10
+lifetime = 0.6
 local_coords = false
 process_material = SubResource( 3 )
+texture = SubResource( 4 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+visible = false
+position = Vector2( -25, 6 )
+amount = 20
+lifetime = 0.6
+local_coords = false
+process_material = SubResource( 3 )
+texture = SubResource( 4 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
