@@ -3,7 +3,7 @@ extends RigidBody2D
 
 export var move_force := 600.0
 export(PackedScene) var Torpedo 
-
+onready var bite_anime := $Bite/AnimationPlayer
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -19,14 +19,18 @@ func _physics_process(delta: float) -> void:
 	).normalized()
 	
 	applied_force = direction * move_force
+	
+	if rotation_degrees != 0:
+		rotation_degrees = 0
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
 	if event.is_action_pressed('torpedo'):
 		if 0 < Info.torpedo_nam:
-			$Bite/AnimationPlayer.play("shot")
+			bite_anime.play("shot")
 	elif event.is_action_pressed("bite"):
-		$Bite/AnimationPlayer.play("bite")
+		bite_anime.play("bite")
+		yield(bite_anime, "animation_finished" )
 
 
 func torpedo_shot():
@@ -54,3 +58,5 @@ func _on_HPArea2D_area_entered(area: Area2D) -> void:
 				get_tree().call_group("ui", "update_hp")
 			else:
 				get_tree().quit()
+
+

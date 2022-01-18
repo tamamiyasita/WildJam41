@@ -34,5 +34,5 @@ func bite(delta):
 
 func _on_Object_area_entered(area):
 	print(area)
-	if area.name == "Bite":
+	if area.name == "Bite2":
 		on_bite_area = area

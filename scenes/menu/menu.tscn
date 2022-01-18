@@ -33,10 +33,10 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="CenterContainer"]
-margin_left = 123.0
-margin_top = 86.0
-margin_right = 901.0
-margin_bottom = 174.0
+margin_left = 678.0
+margin_top = 266.0
+margin_right = 922.0
+margin_bottom = 294.0
 custom_fonts/font = ExtResource( 1 )
 text = "Godot Game Template"
 uppercase = true

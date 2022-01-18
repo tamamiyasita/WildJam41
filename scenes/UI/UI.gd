@@ -5,15 +5,16 @@ onready var score := $Score
 onready var t_container := $HBoxContainer/TContainer
 onready var hp_container := $HBoxContainer/HPContainer
 var torpedo = preload('res://image/Torpedo3.png')
-var torpedo_empty = preload('res://image/Torpedo.png')
+var torpedo_empty = preload('res://image/Torpedo_empty.png')
 
-var hart = preload('res://image/buble.png')
-var hart_empty = preload('res://image/par.png')
+var hart = preload("res://image/hud_heartFull.png")
+#var Hart = preload("res://scenes/UI/Hart.tscn")
+var hart_empty = preload("res://image/hud_heartEmpty.png")
 
 func _ready() -> void:
 	update_torpedo()
 	update_hp()
-	update_score(100000)
+	update_score(1000)
 
 
 func update_score(value):
@@ -26,6 +27,7 @@ func update_hp():
 		c.queue_free()
 	
 	for i in Info.max_hp:
+		
 		var h = TextureRect.new()
 		h.stretch_mode = TextureRect.STRETCH_KEEP
 		if i < Info.hp:
@@ -37,13 +39,15 @@ func update_hp():
 		hp_container.add_child(h)
 		h.rect_size = Vector2(2,2)
 		
+
+		
 func update_torpedo():
 	for c in t_container.get_children():
 		c.queue_free()
 	
 	for i in Info.max_torpedo_nam:
 		var t = TextureRect.new()
-		t.stretch_mode = TextureRect.STRETCH_KEEP
+#		t.stretch_mode = TextureRect.STRETCH_KEEP
 		if i < Info.torpedo_nam:
 			t.texture = torpedo
 
@@ -51,4 +55,3 @@ func update_torpedo():
 			t.texture = torpedo_empty
 			
 		t_container.add_child(t)
-		t.rect_size = Vector2(2,2)

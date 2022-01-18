@@ -8,14 +8,14 @@
 [ext_resource path="res://image/par_4.png" type="Texture" id=6]
 
 [sub_resource type="Gradient" id=24]
-offsets = PoolRealArray( 0.0434783, 0.0712871, 0.149068, 0.347826 )
-colors = PoolColorArray( 1, 0.725105, 0.464844, 1, 1, 1, 1, 1, 0.553062, 0.968453, 0.99707, 1, 0.868759, 0.873792, 0.942383, 1 )
+offsets = PoolRealArray( 0.0434783, 0.0993789, 0.347826 )
+colors = PoolColorArray( 1, 0.725105, 0.464844, 1, 0.553062, 0.968453, 0.99707, 1, 0.868759, 0.873792, 0.942383, 1 )
 
 [sub_resource type="GradientTexture" id=25]
 gradient = SubResource( 24 )
 
 [sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0.543182 ), 0.0, 0.0, 0, 0, Vector2( 0.206439, 1 ), -1.00979, -1.00979, 0, 0, Vector2( 0.973485, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.0163043, 0.932663 ), 0.0, 0.0, 0, 0, Vector2( 0.309783, 0.859935 ), -1.00979, -1.00979, 0, 0, Vector2( 0.961957, 0.293292 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=26]
 curve = SubResource( 3 )
@@ -33,13 +33,15 @@ emission_shape = 1
 emission_sphere_radius = 32.25
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
-gravity = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, -30, 0 )
 initial_velocity = 138.31
 initial_velocity_random = 0.33
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+linear_accel = 13.73
 damping = 100.0
-damping_random = 0.63
+damping_random = 0.36
+scale = 2.0
 scale_random = 1.0
 scale_curve = SubResource( 26 )
 color_ramp = SubResource( 25 )
@@ -114,10 +116,22 @@ tracks/2/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=33]
 resource_name = "burst"
-length = 0.9
+length = 4.0
 step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("Par:texture")
@@ -126,7 +140,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
+"times": PoolRealArray( 0, 0.12, 0.21, 0.3, 0.39, 0.48 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ), null ]
@@ -138,7 +152,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.9 ),
+"times": PoolRealArray( 0, 3.93 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ true ],
@@ -172,30 +186,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="CircleShape2D" id=34]
-radius = 52.1536
+radius = 72.6103
 
 [node name="Explosion" type="Node2D"]
 scale = Vector2( 2, 2 )
 
 [node name="Par" type="Sprite" parent="."]
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 2.2, 2.2 )
 texture = ExtResource( 5 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-scale = Vector2( 1.5, 1.5 )
 emitting = false
-amount = 15
-lifetime = 1.5
+amount = 31
+lifetime = 4.0
 one_shot = true
-speed_scale = 1.5
+speed_scale = 2.0
 explosiveness = 1.0
+randomness = 0.45
 process_material = SubResource( 5 )
 texture = ExtResource( 5 )
 
 [node name="Particles2D2" type="Particles2D" parent="."]
-lifetime = 1.1
+lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 30 )

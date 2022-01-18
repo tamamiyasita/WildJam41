@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/airadventurelevel1.png-e2000e480f851a9518f7f01a7a732ea9.stex"
+path="res://.import/vc.png-d14648b16f8fd48c0bb8f2b5fabde1a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/airadventurelevel1.png"
-dest_files=[ "res://.import/airadventurelevel1.png-e2000e480f851a9518f7f01a7a732ea9.stex" ]
+source_file="res://image/vc.png"
+dest_files=[ "res://.import/vc.png-d14648b16f8fd48c0bb8f2b5fabde1a8.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
