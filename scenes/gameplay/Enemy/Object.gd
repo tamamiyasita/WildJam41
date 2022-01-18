@@ -4,6 +4,11 @@ extends Area2D
 var on_bite_area
 
 
+func _ready() -> void:
+	add_to_group("enemy")
+	add_to_group("take_damage")
+
+
 func _physics_process(delta):
 		
 	if on_bite_area:

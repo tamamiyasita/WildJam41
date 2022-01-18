@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/UI/UI.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/open-sans/open-sans-bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/menu/title_font.tres" type="DynamicFont" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 2 )
+
+[node name="UI" type="Control" groups=["ui"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 12.0
+margin_top = 121.0
+margin_right = 220.0
+margin_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 102.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 106.0
+margin_right = 208.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="RichTextLabel" parent="."]
+margin_left = 15.0
+margin_top = 45.0
+margin_right = 266.0
+margin_bottom = 109.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "100
+"
+text = "100
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

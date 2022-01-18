@@ -20,6 +20,9 @@ func _on_Timer_timeout() -> void:
 
 
 func _on_Area2D_body_entered(body: Node) -> void:
+	get_tree().call_group("shockwave", "shock_wave", global_position)
+	
+	
 	var explosion = Explosion.instance()
 	get_parent().add_child(explosion)
 	explosion.position = position

@@ -48,6 +48,7 @@ config/version="0.0.1"
 [autoload]
 
 Game="*res://autoload/game.gd"
+Info="*res://autoload/Info.gd"
 
 [display]
 
@@ -127,3 +128,4 @@ bite={
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="wall"
 2d_physics/layer_4="torpedo"
+2d_physics/layer_5="damage_obj"
