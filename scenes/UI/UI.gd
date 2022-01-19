@@ -14,7 +14,7 @@ var hart_empty = preload("res://image/hud_heartEmpty.png")
 func _ready() -> void:
 	update_torpedo()
 	update_hp()
-	update_score(1000)
+	update_score(0)
 
 
 func update_score(value):

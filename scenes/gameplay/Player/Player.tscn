@@ -35,7 +35,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Bite2:visible")
+tracks/1/path = NodePath("BiteArea:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -83,7 +83,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Bite2/Particles2D4:emitting")
+tracks/5/path = NodePath("BiteArea/Particles2D4:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -95,7 +95,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Bite2/Particles2D5:emitting")
+tracks/6/path = NodePath("BiteArea/Particles2D5:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -107,7 +107,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Bite2/CollisionShape2D:disabled")
+tracks/7/path = NodePath("BiteArea/CollisionShape2D:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -135,7 +135,7 @@ tracks/0/keys = {
 "values": [ 0.0, 40.0, 0.0, 22.0, 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Bite2:visible")
+tracks/1/path = NodePath("BiteArea:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -147,7 +147,7 @@ tracks/1/keys = {
 "values": [ true, false, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Bite2/Particles2D4:emitting")
+tracks/2/path = NodePath("BiteArea/Particles2D4:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -159,7 +159,7 @@ tracks/2/keys = {
 "values": [ false, true, false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Bite2/Particles2D5:emitting")
+tracks/3/path = NodePath("BiteArea/Particles2D5:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -171,7 +171,7 @@ tracks/3/keys = {
 "values": [ false, true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Bite2/CollisionShape2D:disabled")
+tracks/4/path = NodePath("BiteArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -488,10 +488,17 @@ tracks/0/keys = {
 extents = Vector2( 30.25, 21.375 )
 
 [node name="Player" type="RigidBody2D"]
+position = Vector2( 318, 283 )
 z_index = 1
 gravity_scale = 0.3
 script = ExtResource( 2 )
 Torpedo = ExtResource( 3 )
+
+[node name="VisibleArea2D" type="Area2D" parent="."]
+collision_mask = 50
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisibleArea2D"]
+polygon = PoolVector2Array( -18, -14, 1029, -316, 1036, 305, -19, 22 )
 
 [node name="HPArea2D" type="Area2D" parent="."]
 
@@ -528,17 +535,17 @@ anims/RESET = SubResource( 10 )
 anims/bite = SubResource( 12 )
 anims/shot = SubResource( 11 )
 
-[node name="Bite2" type="Area2D" parent="Bite"]
+[node name="BiteArea" type="Area2D" parent="Bite"]
 visible = false
 position = Vector2( 18, -4.5 )
-collision_mask = 2
+collision_mask = 50
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bite/Bite2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bite/BiteArea"]
 position = Vector2( -1.90735e-06, 0 )
 shape = SubResource( 15 )
 disabled = true
 
-[node name="Particles2D4" type="Particles2D" parent="Bite/Bite2"]
+[node name="Particles2D4" type="Particles2D" parent="Bite/BiteArea"]
 position = Vector2( 1.90735e-06, -3.8147e-06 )
 rotation = -0.698132
 scale = Vector2( 0.5, 0.5 )
@@ -551,7 +558,7 @@ draw_order = 1
 process_material = SubResource( 16 )
 texture = SubResource( 17 )
 
-[node name="Particles2D5" type="Particles2D" parent="Bite/Bite2"]
+[node name="Particles2D5" type="Particles2D" parent="Bite/BiteArea"]
 position = Vector2( 1.90735e-06, -3.8147e-06 )
 rotation = -0.698132
 scale = Vector2( 0.5, 0.5 )
@@ -645,5 +652,7 @@ texture_scale = 2.0
 position = Vector2( 7, -8.625 )
 shape = SubResource( 1 )
 
+[connection signal="body_entered" from="VisibleArea2D" to="." method="_on_VisibleArea2D_body_entered"]
+[connection signal="body_exited" from="VisibleArea2D" to="." method="_on_VisibleArea2D_body_exited"]
 [connection signal="area_entered" from="HPArea2D" to="." method="_on_HPArea2D_area_entered"]
-[connection signal="area_entered" from="Bite/Bite2" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Bite/BiteArea" to="." method="_on_BiteArea_area_entered"]

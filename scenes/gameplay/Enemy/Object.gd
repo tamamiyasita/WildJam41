@@ -12,7 +12,7 @@ func _ready() -> void:
 func _physics_process(delta):
 		
 	if on_bite_area:
-		bite(delta)
+		take_bite(delta)
 		
 		
 
@@ -20,7 +20,7 @@ func _physics_process(delta):
 	
 
 
-func bite(delta):
+func take_bite(delta):
 	var speed = 6
 	var direction = on_bite_area.global_position - global_position
 	direction.normalized()

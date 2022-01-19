@@ -2,6 +2,10 @@ extends Node
 
 var elapsed = 0
 
+func _ready():
+	Info.player = get_node("Player")
+
+
 # `pre_start()` is called when a scene is loaded.
 # Use this function to receive params from `Game.change_scene(params)`.
 func pre_start(params):

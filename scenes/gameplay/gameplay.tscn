@@ -1,14 +1,17 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/gameplay/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/gameplay/pause-layer/pause-layer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/gameplay/Enemy/Object.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/gameplay/Enemy/FishPosition2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://image/kaitei.png" type="Texture" id=4]
 [ext_resource path="res://scenes/gameplay/gameplay.gd" type="Script" id=5]
 [ext_resource path="res://scenes/UI/UI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/gameplay/ShockLayer.gd" type="Script" id=7]
 [ext_resource path="res://scenes/gameplay/Background.gd" type="Script" id=8]
 [ext_resource path="res://image/f1_back.png" type="Texture" id=9]
+[ext_resource path="res://scenes/gameplay/Enemy/Fish1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/gameplay/Enemy/BlueFish1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/gameplay/Enemy/RedFish1.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=33]
 code = "shader_type canvas_item;
@@ -141,7 +144,7 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id=32]
 shader = SubResource( 31 )
-shader_param/angle = 0.0
+shader_param/angle = -0.1
 shader_param/position = 0.1
 shader_param/spread = 0.775
 shader_param/cutoff = -0.665
@@ -151,7 +154,7 @@ shader_param/speed = 6.0
 shader_param/ray1_density = 8.0
 shader_param/ray2_density = 50.0
 shader_param/ray2_intensity = 1.0
-shader_param/color = Color( 1, 0.901961, 0.65098, 0.317647 )
+shader_param/color = Color( 0.65098, 0.654902, 1, 0.317647 )
 shader_param/hdr = false
 shader_param/seed = 11.0
 
@@ -245,7 +248,8 @@ fog_sun_amount = 0.34
 fog_transmit_enabled = true
 fog_height_enabled = true
 glow_enabled = true
-glow_intensity = 0.05
+glow_intensity = 0.4
+glow_strength = 0.8
 glow_blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id=28]
@@ -257,13 +261,45 @@ extents = Vector2( 1127, 64.5 )
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 1038, 57.5 )
 
+[sub_resource type="Animation" id=35]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PopSys:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "move"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PopSys:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 100 ), Vector2( 0, 800 ) ]
+}
+
 [node name="Gameplay" type="Node"]
 script = ExtResource( 5 )
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.854902 )
+color = Color( 0, 0, 0, 0.909804 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -272,7 +308,7 @@ __meta__ = {
 material = SubResource( 34 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.0392157, 0.0352941, 0.0352941, 0.756863 )
+color = Color( 0.0392157, 0.0352941, 0.0352941, 0.768627 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -293,10 +329,8 @@ __meta__ = {
 
 [node name="PauseLayer" parent="." instance=ExtResource( 2 )]
 
-[node name="Object" parent="." instance=ExtResource( 3 )]
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 799, 453 )
+position = Vector2( 798, 416 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -324,6 +358,7 @@ environment = SubResource( 27 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2( -19, -71 )
+collision_layer = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 1686, 564.5 )
@@ -361,3 +396,40 @@ motion_mirroring = Vector2( 2000, 900 )
 light_mask = 3
 texture = ExtResource( 9 )
 centered = false
+
+[node name="EnemyA" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1953, 237 )
+
+[node name="FishPosition2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1847, 18 )
+
+[node name="PopSys" parent="FishPosition2D" index="1"]
+pop_time = 13
+
+[node name="FishPosition2D2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1917, 28 )
+
+[node name="AnimationPlayer" parent="FishPosition2D2" index="0"]
+root_node = NodePath("../../FishPosition2D2")
+
+[node name="PopSys" parent="FishPosition2D2" index="1"]
+Fish = ExtResource( 11 )
+min_num = 7
+max_num = 12
+pop_time = 14
+
+[node name="FishPosition2D3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1917, 28 )
+
+[node name="AnimationPlayer" parent="FishPosition2D3" index="0"]
+root_node = NodePath("../../FishPosition2D2")
+anims/RESET = SubResource( 35 )
+anims/move = SubResource( 36 )
+
+[node name="PopSys" parent="FishPosition2D3" index="1"]
+Fish = ExtResource( 12 )
+pop_time = 14
+
+[editable path="FishPosition2D"]
+[editable path="FishPosition2D2"]
+[editable path="FishPosition2D3"]

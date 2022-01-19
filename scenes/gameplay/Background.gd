@@ -9,4 +9,4 @@ onready var back := $ParallaxLayer
 #	scroll_offset = Vector2.ZERO
 
 func _process(delta: float) -> void:
-	scroll_offset.x -= 60 * delta
+	scroll_offset.x -= 50 * delta
