@@ -6,7 +6,7 @@ export(PackedScene) var Torpedo
 onready var bite_anime := $Bite/AnimationPlayer
 
 func _ready() -> void:
-	pass # Replace with function body.
+	pass ## Replace with function body.
 
 
 func _physics_process(delta: float) -> void:
