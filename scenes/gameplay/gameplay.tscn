@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/gameplay/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/gameplay/pause-layer/pause-layer.tscn" type="PackedScene" id=2]
@@ -9,9 +9,11 @@
 [ext_resource path="res://scenes/gameplay/ShockLayer.gd" type="Script" id=7]
 [ext_resource path="res://scenes/gameplay/Background.gd" type="Script" id=8]
 [ext_resource path="res://image/f1_back.png" type="Texture" id=9]
-[ext_resource path="res://scenes/gameplay/Enemy/Fish1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/gameplay/Enemy/WhiteFish1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/gameplay/Enemy/BlueFish1.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/gameplay/Enemy/RedFish1.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/gameplay/Enemy/EnemyPosition2D.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/gameplay/Enemy/Mob_Red.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Shader" id=33]
 code = "shader_type canvas_item;
@@ -158,7 +160,7 @@ shader_param/color = Color( 0.65098, 0.654902, 1, 0.317647 )
 shader_param/hdr = false
 shader_param/seed = 11.0
 
-[sub_resource type="Shader" id=23]
+[sub_resource type="Shader" id=37]
 code = "shader_type canvas_item;
 
 uniform vec2 global_position;
@@ -180,7 +182,7 @@ void fragment(){
 }"
 
 [sub_resource type="ShaderMaterial" id=24]
-shader = SubResource( 23 )
+shader = SubResource( 37 )
 shader_param/global_position = Vector2( 0, 0 )
 shader_param/screen_size = Vector2( 1600, 900 )
 shader_param/force = 0.0
@@ -355,24 +357,24 @@ anims/shockwave = SubResource( 26 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 27 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Wall" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2( -19, -71 )
 collision_layer = 4
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
 position = Vector2( 1686, 564.5 )
 shape = SubResource( 28 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
 position = Vector2( 743, 1050.5 )
 shape = SubResource( 29 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
 position = Vector2( 828, 9.5 )
 shape = SubResource( 30 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 position = Vector2( -64, 536.5 )
 shape = SubResource( 28 )
 
@@ -404,7 +406,8 @@ position = Vector2( 1953, 237 )
 position = Vector2( 1847, 18 )
 
 [node name="PopSys" parent="FishPosition2D" index="1"]
-pop_time = 13
+max_num = 4
+pop_time = 10
 
 [node name="FishPosition2D2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1917, 28 )
@@ -415,7 +418,7 @@ root_node = NodePath("../../FishPosition2D2")
 [node name="PopSys" parent="FishPosition2D2" index="1"]
 Fish = ExtResource( 11 )
 min_num = 7
-max_num = 12
+max_num = 15
 pop_time = 14
 
 [node name="FishPosition2D3" parent="." instance=ExtResource( 3 )]
@@ -428,7 +431,13 @@ anims/move = SubResource( 36 )
 
 [node name="PopSys" parent="FishPosition2D3" index="1"]
 Fish = ExtResource( 12 )
-pop_time = 14
+pop_time = 22
+
+[node name="Enemy" type="Node2D" parent="."]
+
+[node name="EnemyPosition2D" parent="Enemy" instance=ExtResource( 13 )]
+Enemy = ExtResource( 14 )
+pop_time = 1
 
 [editable path="FishPosition2D"]
 [editable path="FishPosition2D2"]

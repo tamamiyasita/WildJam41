@@ -2,6 +2,7 @@ extends RigidBody2D
 
 
 onready var sprite := $Sprite
+onready var area2d := $Area2D
 
 var on_bite_area
 export var speed := Vector2(-200,0)
@@ -9,6 +10,7 @@ export var score_num := 100
 
 func _ready() -> void:
 	set_as_toplevel(true)
+	area2d.add_to_group("fish")
 	add_to_group("fish")
 #	add_to_group("take_damage")
 	set_physics_process(false)
@@ -45,6 +47,7 @@ func _on_Area2D_area_entered(area):
 	if area.name == "BiteArea":
 		set_physics_process(true)
 		on_bite_area = area
+		
 
 
 

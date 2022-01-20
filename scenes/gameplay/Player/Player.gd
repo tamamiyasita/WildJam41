@@ -25,12 +25,17 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
-	if event.is_action_pressed('torpedo'):
-		if 0 < Info.torpedo_nam:
-			bite_anime.play("shot")
-	elif event.is_action_pressed("bite"):
-		bite_anime.play("bite")
-#		yield(bite_anime, "animation_finished" )
+	if !bite_anime.is_playing():
+		if event.is_action_pressed('torpedo'):
+			if 0 < Info.torpedo_nam:
+				bite_anime.play("shot")
+		elif event.is_action_pressed("bite"):
+			bite_anime.play("bite")
+			$Vpos/ShockLayer.set_process(true)
+			$Vpos/ShockLayer.shock_wave()
+			yield(bite_anime, "animation_finished" )
+			$Vpos/ShockLayer.set_process(false)
+		
 
 
 func torpedo_shot():
@@ -44,26 +49,30 @@ func torpedo_shot():
 
 func _on_BiteArea_area_entered(area):
 	if area.is_in_group("enemy") or area.is_in_group("take_damage"):
+		$Body/EatAnimationPlayer.play("eat")
 		area.remove_from_group("take_damage")
 		#魚雷数を回復
 		if Info.torpedo_nam < Info.max_torpedo_nam:
 			Info.torpedo_nam += 1
 			get_tree().call_group("ui", "update_torpedo")
-	elif area.get_parent().is_in_group("fish"):
+	elif area.is_in_group("fish"):
+		$Body/EatAnimationPlayer.play("eat")
 		print("fish!")
 		get_tree().call_group("ui", "update_score", area.get_parent().score_num)
 		
 	
+func take_damage(area):
+	if 1 < Info.hp:
+		Info.hp -= 1
+		get_tree().call_group("ui", "update_hp")
+	else:
+		get_tree().quit()
 
+	
 
 func _on_HPArea2D_area_entered(area: Area2D) -> void:
-		if area.is_in_group("take_damage"):
-			if 1 < Info.hp:
-				Info.hp -= 1
-				get_tree().call_group("ui", "update_hp")
-			else:
-				get_tree().quit()
-
+	if area.is_in_group("take_damage"):
+		take_damage(area)
 
 
 
@@ -80,3 +89,4 @@ func _on_VisibleArea2D_body_entered(body):
 func _on_VisibleArea2D_body_exited(body):
 	if body.is_in_group("fish"):
 		body.hide()
+

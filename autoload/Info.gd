@@ -9,4 +9,4 @@ export var hp := 3
 
 export var score = 0
 
-onready var player
+onready var player = null

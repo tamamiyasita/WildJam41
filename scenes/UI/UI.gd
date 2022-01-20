@@ -20,6 +20,7 @@ func _ready() -> void:
 func update_score(value):
 	Info.score += value
 	score.bbcode_text = "Score : " + str(Info.score)
+	$Score/AnimationPlayer.play("score")
 
 
 func update_hp():

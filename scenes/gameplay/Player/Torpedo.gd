@@ -20,8 +20,26 @@ func _on_Timer_timeout() -> void:
 
 
 func _on_Area2D_body_entered(body: Node) -> void:
+	$Area2D/CollisionShape2D.disabled = true
 	get_tree().call_group("shockwave", "shock_wave", global_position)
 	
+	var explosion = Explosion.instance()
+	get_parent().add_child(explosion)
+	explosion.position = position
+	yield(get_tree().create_timer(0.1), "timeout")
+	$Sprite.visible = false
+	$Particles2D.emitting = false
+	yield(get_tree().create_timer(0.9), "timeout")
+	queue_free()
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+	queue_free()
+
+
+func _on_Area2D_area_entered(area):
+	$Area2D/CollisionShape2D.disabled = true
+	get_tree().call_group("shockwave", "shock_wave", global_position)
 	
 	var explosion = Explosion.instance()
 	get_parent().add_child(explosion)
