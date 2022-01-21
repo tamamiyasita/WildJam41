@@ -63,6 +63,7 @@ func _on_BiteArea_area_entered(area):
 	
 func take_damage(area):
 	if 1 < Info.hp:
+		$DamageAnime.play("take_damage")
 		Info.hp -= 1
 		get_tree().call_group("ui", "update_hp")
 	else:

@@ -1,6 +1,7 @@
 extends Control
 
 onready var score := $Score
+onready var boss_hp_bar := $TextureProgress 
 
 onready var t_container := $HBoxContainer/TContainer
 onready var hp_container := $HBoxContainer/HPContainer
@@ -15,12 +16,19 @@ func _ready() -> void:
 	update_torpedo()
 	update_hp()
 	update_score(0)
+	boss_hp_bar.max_value = Info.boss_hp
+	boss_hp_bar.value = Info.boss_hp
 
 
 func update_score(value):
 	Info.score += value
-	score.bbcode_text = "Score : " + str(Info.score)
+	score.bbcode_text = "Fish Score : " + str(Info.score)
 	$Score/AnimationPlayer.play("score")
+
+
+func update_boss_hp(value):
+	Info.boss_hp -= value
+	boss_hp_bar.value = Info.boss_hp
 
 
 func update_hp():

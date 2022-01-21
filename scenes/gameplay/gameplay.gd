@@ -34,3 +34,7 @@ func start():
 
 
 
+
+
+func _on_EraArea2D_area_entered(area):
+	area.queue_free()

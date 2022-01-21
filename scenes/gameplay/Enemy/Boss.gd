@@ -1,7 +1,6 @@
 extends Node2D
 
-onready var area2d := $Path2D/PathFollow2D/Area2D
-onready var sprite := $Path2D/PathFollow2D/Area2D/Sprite
+onready var area2d := $Path2D/PathFollow2D/BossArea2D
 onready var tween := $Tween
 onready var path_follow := $Path2D/PathFollow2D
 
@@ -55,12 +54,10 @@ func take_bite(delta):
 
 func _on_Area2D_area_entered(area):
 	print(area)
-	if area.name == "BiteArea":
-		tween.stop_all() 
-		set_physics_process(true)
-		on_bite_area = area
-	elif area.name =="ExpArea":
-		dead()
+	
+	if area.name =="ExpArea":
+		var d = randi() % 3 +1
+		get_tree().call_group("ui", "update_boss_hp", d)
 	
 
 	
@@ -77,6 +74,6 @@ func _on_Timer_timeout():
 	var _s = tween.start()
 	
 	yield(tween, "tween_completed")
-	queue_free()
+#	queue_free()
 
 

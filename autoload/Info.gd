@@ -10,3 +10,6 @@ export var hp := 3
 export var score = 0
 
 onready var player = null
+
+export var boss_hp = 15
+

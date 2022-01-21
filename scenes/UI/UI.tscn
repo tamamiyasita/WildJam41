@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/open-sans/open-sans-bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://image/grk2.png" type="Texture" id=3]
+[ext_resource path="res://image/grk3.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -128,3 +130,17 @@ custom_constants/separation = 21
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 64.0
+margin_top = 374.0
+margin_right = -62.0
+margin_bottom = 416.0
+max_value = 10.0
+value = 3.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 3 )
+nine_patch_stretch = true
