@@ -17,8 +17,10 @@ func pop():
 		var fish = Fish.instance()
 		var x = rand_range(-80, 80)
 		var y = rand_range(-120, 120)
+		var pos = global_position + Vector2(x,y)
 		
-		fish.global_position = global_position
+		fish.global_position = pos
+
 		add_child(fish)
 #		fish.set_as_toplevel(true)
 		

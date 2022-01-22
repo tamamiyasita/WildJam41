@@ -1,78 +1,15 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://image/red_enemy.png" type="Texture" id=1]
 [ext_resource path="res://scenes/gameplay/Enemy/PathMob.gd" type="Script" id=2]
 [ext_resource path="res://image/par.png" type="Texture" id=3]
 [ext_resource path="res://scenes/gameplay/Enemy/RedFish.gd" type="Script" id=4]
-[ext_resource path="res://scenes/gameplay/Enemy/EnmBullet.gd" type="Script" id=5]
-[ext_resource path="res://image/spot.png" type="Texture" id=6]
-[ext_resource path="res://image/enm_bullet.png" type="Texture" id=7]
+[ext_resource path="res://scenes/gameplay/Enemy/EnmBullet.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=7]
 bake_interval = 19.8
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 487.509, 293, 78.1151, -17.6389, -78.1151, 17.6389, -108, 84, 110.001, 49.3883, -110.001, -49.3883, -267, 517, 82.3142, -134.359, -82.3142, 134.359, -496, 170, 94.0129, 74.8161, -94.0129, -74.8161, -673, 502, 88.1945, -25.1984, -88.1945, 25.1984, -1149, 176, 70.5556, -80.6349, -70.5556, 80.6349, -2354, 574 )
-}
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.61832, 2 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "bom"
-length = 0.35
-tracks/0/type = "value"
-tracks/0/path = NodePath("Light2D:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 2.0, 3.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-length = 0.4
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Light2D:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.5 ]
-}
-
-[sub_resource type="PackedScene" id=34]
-_bundled = {
-"conn_count": 0,
-"conns": PoolIntArray(  ),
-"editable_instances": [  ],
-"names": PoolStringArray( "EnemyBullet", "collision_layer", "script", "Area2D", "Sprite", "scale", "texture", "CollisionShape2D", "shape", "Light2D", "energy", "AnimationPlayer", "autoplay", "anims/bom", "anims/shot" ),
-"node_count": 5,
-"node_paths": [  ],
-"nodes": PoolIntArray( -1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 4, 4, -1, 2, 5, 2, 6, 3, 0, 0, 0, 7, 7, -1, 1, 8, 4, 0, 0, 0, 9, 9, -1, 2, 6, 5, 10, 6, 0, 0, 0, 11, 11, -1, 3, 12, 7, 13, 8, 14, 9, 0 ),
-"variants": [ 18, ExtResource( 5 ), Vector2( 1.2, 4 ), ExtResource( 7 ), SubResource( 1 ), ExtResource( 6 ), 2.0, "shot", SubResource( 2 ), SubResource( 3 ) ],
-"version": 2
 }
 
 [sub_resource type="ParticlesMaterial" id=5]
@@ -138,13 +75,13 @@ extents = Vector2( 64.5, 56 )
 length = 1446.0
 
 [node name="Mob" type="Node2D"]
-position = Vector2( 1555, 519 )
 script = ExtResource( 2 )
+move_speed = 120
 dead_color = Color( 0.752941, 0, 0, 1 )
 dead_scale = Vector2( 0.5, 0.5 )
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2( -499, -294 )
+position = Vector2( -485, -276 )
 scale = Vector2( 1.0044, 1 )
 curve = SubResource( 7 )
 
@@ -153,13 +90,13 @@ position = Vector2( 487.509, 293 )
 rotate = false
 
 [node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D"]
-position = Vector2( 510.295, -107 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 4 )
-Bullet = SubResource( 34 )
+Bullet = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Path2D/PathFollow2D/Area2D"]
+modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
 texture = ExtResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="Path2D/PathFollow2D/Area2D/Sprite"]

@@ -2,7 +2,7 @@ extends RigidBody2D
 
 export var speed := Vector2(250,0)
 export(PackedScene) var Explosion
-
+onready var hit_shape := $Area2D/CollisionShape2D
 
 
 func _ready() -> void:
@@ -18,35 +18,23 @@ func _on_Timer_timeout() -> void:
 	$Particles2D2.visible = true
 	set_physics_process(true)
 
-#
-#func _on_Area2D_body_entered(body: Node) -> void:
-#	$Area2D/CollisionShape2D.disabled = true
-#	get_tree().call_group("shockwave", "shock_wave", global_position)
-#
-#	var explosion = Explosion.instance()
-#	get_parent().add_child(explosion)
-#	explosion.position = position
-#	yield(get_tree().create_timer(0.1), "timeout")
-#	$Sprite.visible = false
-#	$Particles2D.emitting = false
-#	yield(get_tree().create_timer(0.9), "timeout")
-#	queue_free()
 
+func explode():
+#		$Area2D/CollisionShape2D.disabled = true
+#		call_deferred("hit_shape.disabled", true)
+		get_tree().call_group("shockwave", "shock_wave", global_position)
+		
+		var explosion = Explosion.instance()
+		get_parent().add_child(explosion)
+		explosion.position = position
+		queue_free()
+	
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	queue_free()
 
 
 func _on_Area2D_area_entered(area):
-	if area.is_in_group("enemy"):
-#		$Area2D/CollisionShape2D.disabled = true
-		get_tree().call_group("shockwave", "shock_wave", global_position)
-		
-		var explosion = Explosion.instance()
-		get_parent().add_child(explosion)
-		explosion.position = position
-		yield(get_tree().create_timer(0.1), "timeout")
-		$Sprite.visible = false
-		$Particles2D.emitting = false
-		yield(get_tree().create_timer(0.9), "timeout")
-		queue_free()
+	if area.is_in_group("enemy") or area.is_in_group("take_damage"):
+		call_deferred("explode")
+#		explode()

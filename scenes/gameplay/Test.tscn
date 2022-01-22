@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/gameplay/Player/Torpedo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/gameplay/Enemy/Mob_Red.tscn" type="PackedScene" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://scenes/gameplay/Enemy/BlueFish1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/gameplay/Test.gd" type="Script" id=6]
 [ext_resource path="res://scenes/gameplay/Enemy/Mob_Black.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/gameplay/Enemy/Boss.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/gameplay/Boss/Boss.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/UI/UI.tscn" type="PackedScene" id=9]
 
 [node name="Test" type="Node2D"]
 script = ExtResource( 6 )
@@ -21,28 +22,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Mob" parent="." instance=ExtResource( 2 )]
-position = Vector2( 963, 681 )
-
-[node name="Mob2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1532, 427 )
-
 [node name="Torpedo" parent="." instance=ExtResource( 1 )]
-position = Vector2( 110, 74 )
+position = Vector2( 243, 817 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 374 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2( 5, 5 )
 
 [node name="Fish" parent="." instance=ExtResource( 5 )]
-position = Vector2( 494, 191 )
+position = Vector2( 469, 666 )
 
 [node name="BlueEnemy" parent="." instance=ExtResource( 4 )]
-position = Vector2( 870, 419 )
+position = Vector2( 872, 692 )
 
 [node name="BacakEnemy" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1104, 427 )
+position = Vector2( 1156, 637 )
 
 [node name="Boss" parent="." instance=ExtResource( 8 )]
-position = Vector2( 1548, 979 )
+speed = Vector2( -80, 0 )
+
+[node name="Mob" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1502, 689 )
+
+[node name="Mob2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 659, 438 )
+
+[node name="UI" parent="." instance=ExtResource( 9 )]

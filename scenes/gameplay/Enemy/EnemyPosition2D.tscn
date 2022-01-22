@@ -20,7 +20,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "move"
-length = 6.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("PopPoint:position")
@@ -29,14 +28,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3.1 ),
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 100 ), Vector2( 0, 800 ) ]
+"values": [ Vector2( 0, 130 ), Vector2( 0, 730 ) ]
 }
 
 [node name="EnemyPosition2D" type="Position2D"]
-position = Vector2( 1421, -10 )
 script = ExtResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]

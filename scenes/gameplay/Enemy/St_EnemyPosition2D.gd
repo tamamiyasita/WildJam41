@@ -17,10 +17,10 @@ func pop():
 	var pop_num = randi() % max_num + min_num
 	for i in range(pop_num):
 		var enemy = Enemy.instance()
-		var x = rand_range(-100, 100)
-		var y = rand_range(-100, 100)
+#		var x = rand_range(-100, 100)
+#		var y = rand_range(-100, 100)
 		
-		var pos = pop_point.global_position + Vector2(x,y)
+		var pos = pop_point.global_position# + Vector2(x,y)
 		enemy.global_position = pos
 #		enemy.global_position += Vector2(x,y)
 		pop_point.add_child(enemy)

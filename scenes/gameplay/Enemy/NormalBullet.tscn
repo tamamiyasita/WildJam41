@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/gameplay/Enemy/NormalBullet.gd" type="Script" id=1]
 [ext_resource path="res://image/b_bullet.png" type="Texture" id=2]
@@ -6,6 +6,21 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.61832, 2 )
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "bom"
@@ -49,7 +64,19 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.5 ]
+"values": [ 1.5, 0.5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
 }
 
 [sub_resource type="ParticlesMaterial" id=4]
@@ -63,8 +90,6 @@ orbit_velocity_random = 0.0
 [node name="NormalBullet" type="Area2D"]
 position = Vector2( 55, 39 )
 collision_layer = 18
-monitoring = false
-monitorable = false
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -77,13 +102,15 @@ shape = SubResource( 1 )
 [node name="Light2D" type="Light2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
+energy = 1.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "shot"
+anims/RESET = SubResource( 5 )
 anims/bom = SubResource( 2 )
 anims/shot = SubResource( 3 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 process_material = SubResource( 4 )
 
-[connection signal="body_entered" from="." to="." method="_on_EnmBullet_body_entered" flags=3]
+[connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]

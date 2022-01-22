@@ -50,9 +50,6 @@ func _physics_process(delta):
 		
 		
 
-#func dead():
-	
-
 
 func take_bite(delta):
 	$AnimationPlayer.stop()
@@ -86,7 +83,8 @@ func shot():
 func _on_ShotArea2D_body_entered(body):
 	if shot_time:
 		if body.name == \"Player\":
-			shot()
+			call_deferred(\"shot\")
+#			shot()
 			shot_time = false
 			$ShotArea2D/ShotTimer.start()
 
@@ -149,10 +147,11 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RayShape2D" id=4]
-length = 659.0
+length = 869.0
 
 [node name="MobBlack" type="Node2D"]
 script = ExtResource( 4 )
+move_speed = 170
 
 [node name="BB" type="Area2D" parent="."]
 collision_layer = 2
@@ -164,6 +163,7 @@ Bullet = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="BB"]
+modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BB"]

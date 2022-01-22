@@ -23,6 +23,7 @@ func _ready() -> void:
 	set_as_toplevel(true)
 	add_to_group("enemy")
 	add_to_group("take_damage")
+	$AnimationPlayer.play("roll")
 
 
 
@@ -43,11 +44,6 @@ func _physics_process(delta):
 	if on_bite_area:
 		take_bite(delta)
 		
-		
-
-#func dead():
-	
-
 
 func take_bite(delta):
 	$AnimationPlayer.stop()

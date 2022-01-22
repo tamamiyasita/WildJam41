@@ -85,6 +85,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "roll"
+length = 0.7
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
@@ -93,7 +94,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 360.0 ]
@@ -103,6 +104,7 @@ tracks/0/keys = {
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 18
 script = ExtResource( 2 )
+speed = 600
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
@@ -119,7 +121,6 @@ shape = SubResource( 7 )
 position = Vector2( -7.5, -0.999996 )
 scale = Vector2( 1.49219, 1.39063 )
 texture = ExtResource( 1 )
-energy = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "shot"
@@ -135,4 +136,4 @@ autoplay = "roll"
 anims/RESET = SubResource( 5 )
 anims/roll = SubResource( 6 )
 
-[connection signal="body_entered" from="." to="." method="_on_EnmBullet_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]

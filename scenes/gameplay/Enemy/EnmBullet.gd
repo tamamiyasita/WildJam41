@@ -1,7 +1,9 @@
 extends Area2D
 
-var speed = -410
+export var speed = -410
 onready var anime :AnimationPlayer = $AnimationPlayer
+onready var sprite := $Sprite
+var on_bite_area
 
 func _ready():
 	add_to_group("take_damage")
@@ -9,11 +11,23 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	position += transform.x * speed * delta
-#
-#func _on_EnmBullet_body_entered(body: Node) -> void:
-#	if body.name == "Player":
-#		anime.play('bom')
-#		yield(anime, "animation_finished" )
-#		queue_free()
 
+	if on_bite_area:
+		take_bite(delta)
+		
 
+func take_bite(delta):
+	$AnimationPlayer.stop()
+	var speeds = 6
+	var direction = on_bite_area.global_position - global_position
+	direction.normalized()
+	position += direction * speeds * delta
+	sprite.scale /= 1.1
+	if sprite.scale.length() < .2:
+		queue_free()
+
+func _on_EnemyBullet_area_entered(area):
+	if area.name == "BiteArea":
+		on_bite_area = area
+	elif area.name =="ExpArea":
+		queue_free()

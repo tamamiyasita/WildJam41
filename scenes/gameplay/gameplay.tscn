@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/gameplay/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/gameplay/pause-layer/pause-layer.tscn" type="PackedScene" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://scenes/gameplay/Enemy/EnemyPosition2D.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/gameplay/Enemy/Mob_Red.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/gameplay/Enemy/Mob_Blue.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/gameplay/Boss/Boss.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/gameplay/Enemy/Mob_Black.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/gameplay/Enemy/St_EnemyPosition2D.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Shader" id=33]
 code = "shader_type canvas_item;
@@ -414,26 +417,28 @@ centered = false
 position = Vector2( 1953, 237 )
 
 [node name="FishPosition2D" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1847, 18 )
+position = Vector2( 1935, 55 )
 
 [node name="PopSys" parent="FishPosition2D" index="1"]
+Fish = ExtResource( 10 )
+min_num = 2
 max_num = 4
 pop_time = 10
 
 [node name="FishPosition2D2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1917, 28 )
+position = Vector2( 1951, 56 )
 
 [node name="AnimationPlayer" parent="FishPosition2D2" index="0"]
 root_node = NodePath("../../FishPosition2D2")
 
 [node name="PopSys" parent="FishPosition2D2" index="1"]
 Fish = ExtResource( 11 )
-min_num = 7
-max_num = 15
+min_num = 9
+max_num = 17
 pop_time = 14
 
 [node name="FishPosition2D3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1917, 28 )
+position = Vector2( 1984, 48 )
 
 [node name="AnimationPlayer" parent="FishPosition2D3" index="0"]
 root_node = NodePath("../../FishPosition2D2")
@@ -447,13 +452,37 @@ pop_time = 22
 [node name="Enemy" type="Node2D" parent="."]
 
 [node name="EnemyPosition2D" parent="Enemy" instance=ExtResource( 13 )]
+position = Vector2( 1776, 2 )
 Enemy = ExtResource( 14 )
-pop_time = 1
+min_num = 4
+max_num = 6
+pop_time = 23
+max_pop = 5
 
 [node name="EnemyPosition2D2" parent="Enemy" instance=ExtResource( 13 )]
+position = Vector2( 1720, 0 )
 Enemy = ExtResource( 15 )
-min_num = 2
-pop_time = 2
+min_num = 3
+max_num = 5
+pop_time = 25
+max_pop = 5
+
+[node name="EnemyPosition2D3" parent="Enemy" instance=ExtResource( 13 )]
+position = Vector2( 1824, 0 )
+Enemy = ExtResource( 17 )
+min_num = 5
+max_num = 8
+pop_time = 27
+max_pop = 5
+
+[node name="EnemyPosition2D4" parent="Enemy" instance=ExtResource( 18 )]
+position = Vector2( -8, 7 )
+Enemy = ExtResource( 16 )
+max_num = 1
+pop_time = 140
+
+[node name="TestCamera2D" type="Camera2D" parent="."]
+zoom = Vector2( 5, 5 )
 
 [connection signal="area_entered" from="Wall/EraArea2D" to="." method="_on_EraArea2D_area_entered"]
 

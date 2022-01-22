@@ -3,7 +3,13 @@ extends RigidBody2D
 
 export var move_force := 600.0
 export(PackedScene) var Torpedo 
+export var dead_color = Color(1,1,1,1)
+export var dead_scale = Vector2(1, 1)
+
 onready var bite_anime := $Bite/AnimationPlayer
+onready var damage_anime := $DamageAnime
+
+var DeadExp = preload("res://scenes/gameplay/particle/DeadExplosion.tscn")
 
 func _ready() -> void:
 	pass ## Replace with function body.
@@ -50,7 +56,8 @@ func torpedo_shot():
 func _on_BiteArea_area_entered(area):
 	if area.is_in_group("enemy") or area.is_in_group("take_damage"):
 		$Body/EatAnimationPlayer.play("eat")
-		area.remove_from_group("take_damage")
+		if area.is_in_group("take_damage"):
+			area.remove_from_group("take_damage")
 		#魚雷数を回復
 		if Info.torpedo_nam < Info.max_torpedo_nam:
 			Info.torpedo_nam += 1
@@ -63,17 +70,28 @@ func _on_BiteArea_area_entered(area):
 	
 func take_damage(area):
 	if 1 < Info.hp:
-		$DamageAnime.play("take_damage")
+		var d = DeadExp.instance()
+		d.exp_mod = dead_color
+		d.exp_scale = dead_scale
+		get_parent().add_child(d)
+		d.global_position = global_position
+		damage_anime.play("take_damage")
+		yield(damage_anime, "animation_finished" )
 		Info.hp -= 1
 		get_tree().call_group("ui", "update_hp")
 	else:
-		get_tree().quit()
+		pass
+#		get_tree().quit()
 
-	
+
+
+
+
 
 func _on_HPArea2D_area_entered(area: Area2D) -> void:
-	if area.is_in_group("take_damage"):
-		take_damage(area)
+	if !damage_anime.is_playing():
+		if area.is_in_group("take_damage"):
+			take_damage(area)
 
 
 

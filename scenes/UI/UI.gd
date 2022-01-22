@@ -22,8 +22,13 @@ func _ready() -> void:
 
 func update_score(value):
 	Info.score += value
-	score.bbcode_text = "Fish Score : " + str(Info.score)
+	Info.hide_score += value
+	score.bbcode_text = "Fishing Score : " + str(Info.score)
 	$Score/AnimationPlayer.play("score")
+	if Info.hide_score >= 2000:
+		Info.hp += 1
+		update_hp()
+		Info.hide_score = 0
 
 
 func update_boss_hp(value):
@@ -32,6 +37,9 @@ func update_boss_hp(value):
 
 
 func update_hp():
+	if Info.hp > Info.max_hp:
+		Info.hp = Info.max_hp
+		
 	for c in hp_container.get_children():
 		c.queue_free()
 	

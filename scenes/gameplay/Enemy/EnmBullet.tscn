@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/gameplay/Enemy/EnmBullet.gd" type="Script" id=1]
 [ext_resource path="res://image/enm_bullet.png" type="Texture" id=2]
@@ -52,6 +52,14 @@ tracks/0/keys = {
 "values": [ 1.0, 0.5 ]
 }
 
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 22.49
+flag_disable_z = true
+gravity = Vector3( 30, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
 [node name="EnemyBullet" type="Area2D"]
 collision_layer = 18
 script = ExtResource( 1 )
@@ -71,3 +79,8 @@ energy = 2.0
 autoplay = "shot"
 anims/bom = SubResource( 2 )
 anims/shot = SubResource( 3 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+process_material = SubResource( 4 )
+
+[connection signal="area_entered" from="." to="." method="_on_EnemyBullet_area_entered"]
