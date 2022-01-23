@@ -9,8 +9,11 @@ export var hp := 3
 
 export var score = 0
 var hide_score = 0
+var canon_score = 500
+var max_canon_score = 500
+var canon_charge := true
 
 onready var player = null
 
-export var boss_hp = 15
+export var boss_hp = 12
 

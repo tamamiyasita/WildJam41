@@ -47,8 +47,9 @@ func _on_Area2D_area_entered(area):
 	if area.name == "BiteArea":
 		set_physics_process(true)
 		on_bite_area = area
+	elif area.name =="ExpArea" or area.name == "CanonArea":
+		queue_free()
 		
-
 
 
 

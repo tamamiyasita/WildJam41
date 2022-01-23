@@ -484,6 +484,8 @@ pop_time = 140
 [node name="TestCamera2D" type="Camera2D" parent="."]
 zoom = Vector2( 5, 5 )
 
+[node name="Boss" parent="." instance=ExtResource( 16 )]
+
 [connection signal="area_entered" from="Wall/EraArea2D" to="." method="_on_EraArea2D_area_entered"]
 
 [editable path="FishPosition2D"]

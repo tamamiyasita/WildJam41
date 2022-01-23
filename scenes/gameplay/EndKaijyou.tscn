@@ -1,0 +1,163 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://image/tuki.png" type="Texture" id=1]
+[ext_resource path="res://image/yoru_kaijyou.png" type="Texture" id=2]
+[ext_resource path="res://image/sk2.png" type="Texture" id=3]
+[ext_resource path="res://image/spot.png" type="Texture" id=4]
+[ext_resource path="res://image/boss_dead.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/open-sans/open-sans-regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://scenes/gameplay/EndKaijyou.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+outline_size = 1
+outline_color = Color( 0.921569, 1, 0.705882, 1 )
+extra_spacing_space = 22
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 58
+outline_size = 1
+outline_color = Color( 0.960784, 0.968627, 0.945098, 1 )
+extra_spacing_space = 22
+font_data = ExtResource( 6 )
+
+[node name="Kaijyou" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="umi" type="TextureRect" parent="."]
+modulate = Color( 0.027451, 0.164706, 0.219608, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="obj" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rope" type="ColorRect" parent="obj"]
+margin_left = 1072.0
+margin_top = 540.0
+margin_right = 1076.0
+margin_bottom = 690.0
+rect_rotation = 37.0
+color = Color( 0.5, 0.5, 0.5, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="same" type="TextureRect" parent="obj"]
+modulate = Color( 0.172549, 0.4, 0.533333, 1 )
+margin_left = 1033.0
+margin_top = 509.0
+margin_right = 1321.0
+margin_bottom = 645.0
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rope2" type="ColorRect" parent="obj"]
+margin_left = 1065.0
+margin_top = 539.0
+margin_right = 1070.0
+margin_bottom = 549.0
+color = Color( 0.5, 0.5, 0.5, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boss" type="TextureRect" parent="obj"]
+modulate = Color( 0.239216, 0.247059, 0.337255, 0.878431 )
+margin_left = 762.0
+margin_top = 864.0
+margin_right = 1012.0
+margin_bottom = 1064.0
+rect_rotation = -70.0
+rect_scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rope3" type="ColorRect" parent="obj"]
+margin_left = 921.0
+margin_top = 685.0
+margin_right = 934.0
+margin_bottom = 729.0
+rect_rotation = -65.1
+color = Color( 0.5, 0.5, 0.56, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -354.0
+color = Color( 0.0666667, 0.0980392, 0.12549, 0.513726 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tuki" type="TextureRect" parent="."]
+modulate = Color( 0.447059, 0.454902, 0.298039, 1 )
+margin_left = 150.0
+margin_top = 109.0
+margin_right = 250.0
+margin_bottom = 209.0
+rect_scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 282, 200 )
+texture = ExtResource( 4 )
+texture_scale = 50.0
+color = Color( 1, 0.992157, 0.741176, 1 )
+
+[node name="Light2D2" type="Light2D" parent="."]
+position = Vector2( 237, 190 )
+texture = ExtResource( 4 )
+texture_scale = 8.0
+color = Color( 1, 0.992157, 0.741176, 1 )
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 793.0
+margin_top = 407.0
+margin_right = 1376.0
+margin_bottom = 476.0
+custom_colors/font_color = Color( 0.054902, 0.309804, 0.596078, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Thank you for playing!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 483.0
+margin_top = 248.0
+margin_right = 983.0
+margin_bottom = 327.0
+custom_colors/font_color = Color( 0.521569, 0.596078, 0.054902, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "You'r SCORE "

@@ -10,6 +10,7 @@ onready var bite_anime := $Bite/AnimationPlayer
 onready var damage_anime := $DamageAnime
 
 var DeadExp = preload("res://scenes/gameplay/particle/DeadExplosion.tscn")
+var Canon = preload("res://scenes/gameplay/particle/canon2D.tscn")
 
 func _ready() -> void:
 	pass ## Replace with function body.
@@ -41,6 +42,10 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 			$Vpos/ShockLayer.shock_wave()
 			yield(bite_anime, "animation_finished" )
 			$Vpos/ShockLayer.set_process(false)
+		elif event.is_action_pressed("canon"):
+			if Info.canon_charge:
+				bite_anime.play("canon")
+				get_tree().call_group("ui", "update_charge")
 		
 
 
@@ -51,6 +56,14 @@ func torpedo_shot():
 	torpedo.global_position = $Position2D.global_position
 	torpedo.apply_central_impulse(Vector2(250, 0))
 	add_child(torpedo)
+
+func canon_shot():
+	var canon = Canon.instance() as Position2D
+	canon.global_position = $Position2D.global_position
+	add_child(canon)
+	yield(get_tree().create_timer(3.5), "timeout")
+	canon.queue_free()
+
 
 
 func _on_BiteArea_area_entered(area):

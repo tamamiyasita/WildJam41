@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://image/kaijyou.png" type="Texture" id=1]
-[ext_resource path="res://image/sk.png" type="Texture" id=2]
+[ext_resource path="res://image/sk2.png" type="Texture" id=2]
 [ext_resource path="res://image/Sprite-0001.png" type="Texture" id=3]
+[ext_resource path="res://image/spot.png" type="Texture" id=4]
 
 [node name="Kaijyou" type="Control"]
 anchor_right = 1.0
@@ -29,6 +30,7 @@ rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="TextureRect3" type="TextureRect" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0.803922 )
 margin_left = 235.0
 margin_top = 638.0
@@ -39,3 +41,10 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 159, 235 )
+texture = ExtResource( 4 )
+texture_scale = 9.65
+color = Color( 0.980392, 0.968627, 0.619608, 1 )
+energy = 0.7

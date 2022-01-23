@@ -29,5 +29,5 @@ func take_bite(delta):
 func _on_EnemyBullet_area_entered(area):
 	if area.name == "BiteArea":
 		on_bite_area = area
-	elif area.name =="ExpArea":
+	elif area.name =="ExpArea" or area.name == "CanonArea":
 		queue_free()

@@ -13,6 +13,8 @@ export var dead_color = Color(1,1,1,1)
 export var dead_scale = Vector2(1, 1)
 
 var DeadExp = preload("res://scenes/gameplay/particle/DeadExplosion.tscn")
+var is_dead = false
+
 
 #func _ready() -> void:
 #	set_as_toplevel(true)
@@ -28,14 +30,24 @@ func _physics_process(delta):
 		
 		
 
+
+
 func dead():
-	var d = DeadExp.instance()
-	d.exp_mod = dead_color
-	d.exp_scale = dead_scale
-	get_parent().add_child(d)
-	d.global_position = area2d.global_position
-	d.dead()
-	queue_free()
+	if is_dead == false:
+		is_dead = true
+		
+		var d = DeadExp.instance()
+		d.exp_mod = dead_color
+		d.exp_scale = dead_scale
+		get_parent().add_child(d)
+		d.global_position = area2d.global_position
+		d.dead()
+		area2d.dead_anime.play("dead")
+		
+		yield(area2d.dead_anime, "animation_finished" )
+		print("boss_end")
+		Game.change_scene("res://scenes/gameplay/EndKaijyou.tscn")
+	
 
 #func take_bite(delta):
 #	$AnimationPlayer.stop()

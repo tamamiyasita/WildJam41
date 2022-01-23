@@ -50,7 +50,7 @@ func _on_Area2D_area_entered(area):
 		is_dead = true
 		on_bite_area = area
 #		call_deferred("hit_shape.disabled", true)
-	elif area.name =="ExpArea":
+	elif area.name =="ExpArea" or area.name == "CanonArea":
 		queue_free()
 	elif area.name == "HPArea2D":
 		call_deferred("explode")

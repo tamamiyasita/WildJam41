@@ -59,7 +59,7 @@ func _on_Area2D_area_entered(area):
 		tween.stop_all() 
 		set_physics_process(true)
 		on_bite_area = area
-	elif area.name =="ExpArea":
+	elif area.name =="ExpArea" or area.name == "CanonArea":
 		dead()
 	
 

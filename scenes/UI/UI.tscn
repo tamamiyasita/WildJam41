@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/open-sans/open-sans-bold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://image/grk2.png" type="Texture" id=3]
 [ext_resource path="res://image/grk3.png" type="Texture" id=4]
+[ext_resource path="res://image/Sprite-0001.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -59,6 +60,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1.4, 1.2 ), Vector2( 1, 1 ) ]
 }
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/grk3.png-a23645df21cbb3cca42076be171a2ea9.stex"
 
 [node name="UI" type="Control" groups=["ui"]]
 anchor_right = 1.0
@@ -121,12 +125,36 @@ rect_min_size = Vector2( 5, 0 )
 size_flags_horizontal = 2
 
 [node name="TContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 80.0
-margin_right = 80.0
+margin_left = 50.0
+margin_right = 50.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 2
 custom_constants/separation = 21
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+modulate = Color( 0.352941, 0.266667, 0.266667, 0.45098 )
+margin_left = 76.0
+margin_right = 81.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 5, 0 )
+size_flags_horizontal = 2
+
+[node name="CanonProgress" type="TextureProgress" parent="HBoxContainer"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
+margin_left = 103.0
+margin_right = 133.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 30, 0 )
+max_value = 10.0
+value = 3.0
+texture_under = SubResource( 5 )
+texture_progress = ExtResource( 5 )
+fill_mode = 3
+nine_patch_stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
