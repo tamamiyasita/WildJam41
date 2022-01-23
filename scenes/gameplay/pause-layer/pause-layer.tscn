@@ -14,12 +14,13 @@ pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="PressESCToOpenMenu" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -244.5
-margin_top = 24.0
-margin_right = 244.5
-margin_bottom = 31.0
+margin_left = -778.0
+margin_top = 780.0
+margin_right = -289.0
+margin_bottom = 811.0
 custom_colors/font_color = Color( 0.788235, 0.788235, 0.788235, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Pause: ESC (keyboard) or START button (joypad)"

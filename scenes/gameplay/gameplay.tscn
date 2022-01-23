@@ -450,6 +450,7 @@ Fish = ExtResource( 12 )
 pop_time = 22
 
 [node name="Enemy" type="Node2D" parent="."]
+position = Vector2( 280, 2 )
 
 [node name="EnemyPosition2D" parent="Enemy" instance=ExtResource( 13 )]
 position = Vector2( 1776, 2 )
@@ -476,15 +477,19 @@ pop_time = 27
 max_pop = 5
 
 [node name="EnemyPosition2D4" parent="Enemy" instance=ExtResource( 18 )]
-position = Vector2( -8, 7 )
+position = Vector2( -160, 10 )
 Enemy = ExtResource( 16 )
 max_num = 1
 pop_time = 140
 
+[node name="testEnemyPosition2D5" parent="Enemy" instance=ExtResource( 18 )]
+position = Vector2( -160, 10 )
+Enemy = ExtResource( 16 )
+max_num = 1
+pop_time = 50000
+
 [node name="TestCamera2D" type="Camera2D" parent="."]
 zoom = Vector2( 5, 5 )
-
-[node name="Boss" parent="." instance=ExtResource( 16 )]
 
 [connection signal="area_entered" from="Wall/EraArea2D" to="." method="_on_EraArea2D_area_entered"]
 

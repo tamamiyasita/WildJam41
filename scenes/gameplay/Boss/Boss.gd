@@ -24,7 +24,7 @@ var is_dead = false
 
 
 func _physics_process(delta):
-	position.x -= delta * 200
+	position.x -= delta * 400
 #	if on_bite_area:
 #		take_bite(delta)
 		

@@ -15,5 +15,5 @@ var canon_charge := true
 
 onready var player = null
 
-export var boss_hp = 12
+export var boss_hp = 32
 

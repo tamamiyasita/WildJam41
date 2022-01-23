@@ -18,6 +18,8 @@ var canon_in = false
 func _ready() -> void:
 	add_to_group("enemy")
 	add_to_group("take_damage")
+	get_tree().call_group("ui", "hp_show")
+	
 	
 func big_shot():
 	print("shot!")
@@ -53,6 +55,8 @@ func _on_BossArea2D_area_entered(area):
 		var d = randi() % 3 + 2
 		damage()
 		get_tree().call_group("ui", "update_boss_hp", d)
+		yield(get_tree().create_timer(0.1), "timeout")
+		
 	elif area.name == "CanonArea":	
 		canon_in = true
 #		get_tree().call_group("ui", "update_boss_hp", 1)

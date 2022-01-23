@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/魔王魂  イベント40.mp3-050f9093d126c53d71153d8be11e7295.mp3str"
+
+[deps]
+
+source_file="res://sound/魔王魂  イベント40.mp3"
+dest_files=[ "res://.import/魔王魂  イベント40.mp3-050f9093d126c53d71153d8be11e7295.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

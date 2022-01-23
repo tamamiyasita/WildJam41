@@ -12,6 +12,7 @@ func _ready():
 	timer.start(pop_time)
 	
 func pop():
+	$gyorai.play()
 	var r = int(rand_range(2,5))
 	for p in range(r):
 		var pop_num = randi() % max_num + min_num

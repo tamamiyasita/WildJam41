@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/魔王魂  ヒーリング02.ogg-050ea89135da81384af9d394acc46f2d.oggstr"
+
+[deps]
+
+source_file="res://sound/魔王魂  ヒーリング02.ogg"
+dest_files=[ "res://.import/魔王魂  ヒーリング02.ogg-050ea89135da81384af9d394acc46f2d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

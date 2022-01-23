@@ -13,6 +13,12 @@ var hart = preload("res://image/hud_heartFull.png")
 #var Hart = preload("res://scenes/UI/Hart.tscn")
 var hart_empty = preload("res://image/hud_heartEmpty.png")
 
+
+onready var start_bgm := $start
+onready var boss_bgm := $boss
+
+
+
 func _ready() -> void:
 	update_torpedo()
 	update_hp()
@@ -49,6 +55,12 @@ func update_boss_hp(value):
 	boss_hp_bar.value = Info.boss_hp
 	if Info.boss_hp < 0:
 		get_tree().call_group("boss","dead")
+
+
+func hp_show():
+	$TextureProgress.show()
+	start_bgm.stop()
+	boss_bgm.play()
 
 
 func update_hp():

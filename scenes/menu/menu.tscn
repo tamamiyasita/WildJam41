@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/menu/title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/play-button.gd" type="Script" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://scenes/gameplay/Kaijyou.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/menu/godot-version.gd" type="Script" id=8]
 [ext_resource path="res://image/enem_1.png" type="Texture" id=9]
+[ext_resource path="res://sound/魔王魂  村10.ogg" type="AudioStream" id=10]
+[ext_resource path="res://image/blue_fish.png" type="Texture" id=11]
+[ext_resource path="res://scenes/menu/OP.tscn" type="PackedScene" id=12]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -18,7 +21,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.176471, 0.682353, 0.647059, 1 )
@@ -26,34 +36,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Kaijyou" parent="." instance=ExtResource( 7 )]
+[node name="Kaijyou" parent="Control" instance=ExtResource( 7 )]
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -339.0
+margin_bottom = -412.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="CenterContainer"]
-visible = false
-margin_left = 37.0
-margin_top = 227.0
-margin_right = 1562.0
-margin_bottom = 333.0
-custom_fonts/font = ExtResource( 1 )
-text = "sailing Rou's shark-type submarine"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title2" type="Label" parent="CenterContainer"]
+[node name="Title2" type="Label" parent="Control/CenterContainer"]
 margin_left = 201.0
-margin_top = 118.0
+margin_top = 82.0
 margin_right = 1398.0
-margin_bottom = 442.0
+margin_bottom = 406.0
 custom_colors/font_color = Color( 0.372549, 0.835294, 0.933333, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "     sailing !
@@ -64,7 +61,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -78,7 +75,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="Button" parent="VBoxContainer"]
+[node name="PlayButton" type="Button" parent="Control/VBoxContainer"]
 margin_right = 200.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 200, 70 )
@@ -87,13 +84,14 @@ focus_next = NodePath("../ExitButton")
 custom_fonts/font = ExtResource( 4 )
 text = "START"
 icon = ExtResource( 9 )
+flat = true
 expand_icon = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
+[node name="ExitButton" type="Button" parent="Control/VBoxContainer"]
 margin_top = 86.0
 margin_right = 200.0
 margin_bottom = 156.0
@@ -101,13 +99,15 @@ rect_min_size = Vector2( 200, 70 )
 focus_neighbour_top = NodePath("../PlayButton")
 focus_previous = NodePath("../PlayButton")
 custom_fonts/font = ExtResource( 4 )
-text = "EXIT"
+text = "   EXIT"
+icon = ExtResource( 11 )
+flat = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Version" type="VBoxContainer" parent="."]
+[node name="Version" type="VBoxContainer" parent="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -118,14 +118,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameVersion" type="Label" parent="Version"]
+[node name="GameVersion" type="Label" parent="Control/Version"]
 margin_right = 182.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
 text = "<x.y.z>"
 script = ExtResource( 6 )
 
-[node name="GodotVersion" type="Label" parent="Version"]
+[node name="GodotVersion" type="Label" parent="Control/Version"]
 margin_top = 38.0
 margin_right = 182.0
 margin_bottom = 72.0
@@ -134,12 +134,12 @@ custom_fonts/font = ExtResource( 5 )
 text = "<GodotVersion>"
 script = ExtResource( 8 )
 
-[node name="Credits" type="VBoxContainer" parent="."]
+[node name="Credits" type="VBoxContainer" parent="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -147.0
+margin_left = -259.0
 margin_top = -90.0
 margin_right = -16.0
 margin_bottom = -16.0
@@ -149,14 +149,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MadeByLabel" type="Label" parent="Credits"]
+[node name="MadeByLabel" type="Label" parent="Control/Credits"]
 margin_right = 243.0
 margin_bottom = 34.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "made by:"
 
-[node name="Developer1" type="Label" parent="Credits"]
+[node name="Developer1" type="Label" parent="Control/Credits"]
 margin_top = 38.0
 margin_right = 243.0
 margin_bottom = 72.0
@@ -165,7 +165,7 @@ custom_colors/font_color = Color( 0.92549, 0.92549, 0.92549, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "Crystal Bit community"
 
-[node name="Developer2" type="Label" parent="Credits"]
+[node name="Developer2" type="Label" parent="Control/Credits"]
 visible = false
 margin_top = 86.0
 margin_right = 157.0
@@ -175,7 +175,7 @@ custom_colors/font_color = Color( 0.886275, 0.87451, 0.87451, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "Developer 2"
 
-[node name="Developer3" type="Label" parent="Credits"]
+[node name="Developer3" type="Label" parent="Control/Credits"]
 visible = false
 margin_top = 129.0
 margin_right = 157.0
@@ -185,7 +185,14 @@ custom_colors/font_color = Color( 0.886275, 0.87451, 0.87451, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "Developer 3"
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="VBoxContainer/PlayButton" method="_on_Button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ExitButton" to="VBoxContainer/ExitButton" method="_on_ExitButton_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -16.545
+autoplay = true
 
-[editable path="Kaijyou"]
+[node name="Menu" parent="." instance=ExtResource( 12 )]
+
+[connection signal="pressed" from="Control/VBoxContainer/PlayButton" to="Control/VBoxContainer/PlayButton" method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/ExitButton" to="Control/VBoxContainer/ExitButton" method="_on_ExitButton_pressed"]
+
+[editable path="Control/Kaijyou"]

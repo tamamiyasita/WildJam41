@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://image/same/cockpit_l.png" type="Texture" id=1]
 [ext_resource path="res://scenes/gameplay/Player/Player.gd" type="Script" id=2]
@@ -14,9 +14,13 @@
 [ext_resource path="res://image/same/same_te2.png" type="Texture" id=12]
 [ext_resource path="res://image/torchmap.png" type="Texture" id=13]
 [ext_resource path="res://image/same/same_te1.png" type="Texture" id=14]
-[ext_resource path="res://image/same/vacuum.png" type="Texture" id=15]
+[ext_resource path="res://image/heri_Rou_anb.png" type="Texture" id=15]
 [ext_resource path="res://image/same/cher.png" type="Texture" id=16]
 [ext_resource path="res://scenes/gameplay/ShockLayer.gd" type="Script" id=17]
+[ext_resource path="res://sound/魔王魂  爆発04.wav" type="AudioStream" id=18]
+[ext_resource path="res://sound/魔王魂  炎06.wav" type="AudioStream" id=19]
+[ext_resource path="res://sound/Strenght_Buff_Spell.wav" type="AudioStream" id=20]
+[ext_resource path="res://sound/魔王魂  戦闘14.wav" type="AudioStream" id=21]
 
 [sub_resource type="Animation" id=32]
 length = 0.001
@@ -202,6 +206,34 @@ tracks/1/keys = {
 "values": [ 0.0, 0.04 ]
 }
 
+[sub_resource type="Animation" id=35]
+resource_name = "shockwave2"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/force")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1.4, 3.3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.08, 0.05, 0.08, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 1.6, 1.9, 2.2, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.05, 0.03, 0.04, 0.02, 0.04, 0.03, 0.02, 0.03 ]
+}
+
 [sub_resource type="Animation" id=10]
 length = 0.001
 tracks/0/type = "value"
@@ -300,6 +332,42 @@ tracks/7/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("GyoraiAudioStreamPlayer:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("CanonAudioStreamPlayer:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Vcm:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "bite"
@@ -364,6 +432,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [ true, false, true ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Vcm:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=34]
 resource_name = "canon"
@@ -378,7 +458,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 3.5, 3.9 ),
 "transitions": PoolRealArray( -2, -2, 1, 2 ),
 "update": 0,
-"values": [ 0.0, 40.0, 40.0, 0.0 ]
+"values": [ 0.0, 60.0, 67.0, 0.0 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("..")
@@ -393,6 +473,18 @@ tracks/1/keys = {
 "args": [  ],
 "method": "canon_shot"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CanonAudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -422,6 +514,18 @@ tracks/1/keys = {
 "args": [  ],
 "method": "torpedo_shot"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GyoraiAudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=30]
@@ -490,36 +594,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 2, 2 ), Vector2( 2.1, 2.5 ), Vector2( 2, 2 ) ]
 }
-
-[sub_resource type="Shader" id=13]
-code = "shader_type canvas_item;
-
-uniform vec2 global_position;
-uniform vec2 screen_size;
-uniform float force;
-uniform float size;
-uniform float thickness;
-
-void fragment(){
-	vec2 center = global_position;
-	float ratio = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
-	center.x = center.x / screen_size.x;
-	center.x = (center.x - 0.5) / ratio + 0.5;
-	center.y = (screen_size.y - center.y) / screen_size.y;
-	vec2 scaledUV = (SCREEN_UV - vec2(0.5, 0.0) ) / vec2(ratio, 1.0) + vec2(0.5, 0.0);
-	float mask = (1.0 - smoothstep(size-0.1, size, length(scaledUV - center))) * smoothstep(size-thickness-0.1, size-thickness, length(scaledUV - center));
-	vec2 disp = normalize(SCREEN_UV - center) * force * mask;
-	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - disp);
-}"
-
-[sub_resource type="ShaderMaterial" id=14]
-render_priority = 7
-shader = SubResource( 13 )
-shader_param/global_position = Vector2( 80, 0 )
-shader_param/screen_size = Vector2( 800, 900 )
-shader_param/force = null
-shader_param/size = 1.0
-shader_param/thickness = 1.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -615,9 +689,46 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 3.5, 0.5 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Cher/HeriRou:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../HeriRouAnb:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 247, -342 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../HeriRouAnb:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=19]
 resource_name = "cover"
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -625,10 +736,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 1, 2.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, -90.0 ]
+"values": [ 0.0, -90.0, -90.0, 0.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../Cher:position")
@@ -637,10 +748,46 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 1, 2.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 39, -12 ), Vector2( -34, -12 ), Vector2( -34, -12 ), Vector2( 39, -12 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Cher/HeriRou:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../HeriRouAnb:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 39, -12 ), Vector2( -34, -12 ) ]
+"values": [ Vector2( 247, -372 ), Vector2( -20, -19 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../HeriRouAnb:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="ParticlesMaterial" id=6]
@@ -725,10 +872,17 @@ tracks/0/keys = {
 extents = Vector2( 30.25, 21.375 )
 
 [node name="Player" type="RigidBody2D"]
-z_index = 1
+z_index = 2
 gravity_scale = 0.3
 script = ExtResource( 2 )
 Torpedo = ExtResource( 3 )
+
+[node name="HeriRouAnb" type="Sprite" parent="."]
+visible = false
+position = Vector2( 247, -342 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 15 )
+flip_h = true
 
 [node name="DamageAnime" type="AnimationPlayer" parent="."]
 root_node = NodePath("../VisibleArea2D")
@@ -772,6 +926,7 @@ scale = Vector2( 2, 2 )
 collision_mask = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
+visible = false
 position = Vector2( -1.90735e-06, 0 )
 shape = SubResource( 15 )
 disabled = true
@@ -822,6 +977,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Vpos/ShockLayer/Shockwave"]
 anims/RESET = SubResource( 27 )
 anims/shockwave = SubResource( 28 )
+anims/shockwave2 = SubResource( 35 )
 
 [node name="Bite" type="Sprite" parent="."]
 position = Vector2( 30, 24 )
@@ -835,6 +991,26 @@ anims/bite = SubResource( 12 )
 anims/canon = SubResource( 34 )
 anims/shot = SubResource( 11 )
 
+[node name="GyoraiAudioStreamPlayer" type="AudioStreamPlayer" parent="Bite"]
+stream = ExtResource( 18 )
+volume_db = -20.0
+pitch_scale = 1.53
+
+[node name="CanonAudioStreamPlayer" type="AudioStreamPlayer" parent="Bite"]
+stream = ExtResource( 19 )
+volume_db = -2.81
+pitch_scale = 0.52
+
+[node name="Vcm" type="AudioStreamPlayer" parent="Bite"]
+stream = ExtResource( 20 )
+volume_db = -16.101
+pitch_scale = 1.03
+
+[node name="mgmg" type="AudioStreamPlayer" parent="Bite"]
+stream = ExtResource( 21 )
+volume_db = -24.818
+pitch_scale = 0.96
+
 [node name="Body" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 9 )
@@ -842,14 +1018,6 @@ texture = ExtResource( 9 )
 [node name="EatAnimationPlayer" type="AnimationPlayer" parent="Body"]
 anims/RESET = SubResource( 30 )
 anims/eat = SubResource( 31 )
-
-[node name="Vacuum" type="Sprite" parent="."]
-visible = false
-material = SubResource( 14 )
-position = Vector2( 97, 23 )
-rotation = 4.57178e-08
-scale = Vector2( 2.6075, 3.5375 )
-texture = ExtResource( 15 )
 
 [node name="Oppo" type="Sprite" parent="."]
 position = Vector2( -115, -1 )
